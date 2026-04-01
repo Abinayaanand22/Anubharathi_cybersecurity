@@ -1,122 +1,123 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Contents</title>
-
+    <meta charset="UTF-8" />
+    <title>To-Do List App</title>
     <style>
       body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
         margin: 0;
         padding: 0;
-        background-image: url("images/indexbg.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        font-family: "Times New Roman", Times, serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
-
-      /* Heading */
-
+      .app {
+        background: #fff;
+        width: 350px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
       h1 {
         text-align: center;
-        margin-top: 80px;
-        font-size: 55px;
-        color: #5a2d0c;
-        text-shadow: 2px 2px 4px #d8b38a;
+        color: #333;
+        margin-bottom: 20px;
       }
-
-      /* Content area */
-
-      .container {
-        width: 60%;
-        margin: 80px auto;
-      }
-
-      /* Cuisine titles */
-
-      .cuisine {
-        font-size: 32px;
-        color: #7b3f00;
-        margin-top: 40px;
-        font-weight: bold;
-      }
-
-      /* Row layout */
-
-      .row {
+      .input-area {
         display: flex;
         justify-content: space-between;
-        font-size: 22px;
-        color: #4b2e19;
-        margin: 8px 0;
+        margin-bottom: 20px;
       }
-
-      /* Dish links */
-
-      a {
-        text-decoration: none;
-        color: #4b2e19;
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: border 0.3s;
       }
-
-      a:hover {
-        color: #8b4513;
+      input:focus {
+        border-color: #74ebd5;
+      }
+      button {
+        margin-left: 10px;
+        padding: 10px 15px;
+        border: none;
+        background: #74ebd5;
+        color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background: #4bb3a7;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        background: #f9f9f9;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s;
+      }
+      li:hover {
+        transform: scale(1.02);
+      }
+      .delete {
+        background: #ff6b6b;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .delete:hover {
+        background: #e63946;
       }
     </style>
   </head>
-
   <body>
-    <h1>What's In There !!!</h1>
-
-    <div class="container">
-      <div class="cuisine">Indian</div>
-
-      <div class="row">
-        <span><a href="masala-dosa.html">Masala Dosa</a></span>
-        <span>1</span>
+    <div class="app">
+      <h1>My To-Do List</h1>
+      <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Enter a new task..." />
+        <button onclick="addTask()">Add</button>
       </div>
-
-      <div class="row">
-        <span><a href="biryani.html">Vegetable Biryani</a></span>
-        <span>2</span>
-      </div>
-
-      <div class="row">
-        <span><a href="paneer.html">Paneer Butter Masala</a></span>
-        <span>3</span>
-      </div>
-
-      <div class="cuisine">North Indian</div>
-
-      <div class="row">
-        <span><a href="butter-chicken.html">Butter Chicken</a></span>
-        <span>4</span>
-      </div>
-
-      <div class="row">
-        <span><a href="chole.html">Chole Bhature</a></span>
-        <span>5</span>
-      </div>
-
-      <div class="row">
-        <span><a href="paratha.html">Aloo Paratha</a></span>
-        <span>6</span>
-      </div>
-
-      <div class="cuisine">Italian</div>
-
-      <div class="row">
-        <span><a href="pizza.html">Margherita Pizza</a></span>
-        <span>7</span>
-      </div>
-
-      <div class="row">
-        <span><a href="spaghetti.html">Spaghetti Aglio e Olio</a></span>
-        <span>8</span>
-      </div>
-
-      <div class="row">
-        <span><a href="lasagna.html">Lasagna</a></span>
-        <span>9</span>
-      </div>
+      <ul id="taskList"></ul>
     </div>
+
+    <script>
+      function addTask() {
+        const input = document.getElementById("taskInput");
+        const task = input.value.trim();
+        if (task === "") return;
+
+        const li = document.createElement("li");
+        li.textContent = task;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete";
+        deleteBtn.onclick = function () {
+          li.remove();
+        };
+
+        li.appendChild(deleteBtn);
+        document.getElementById("taskList").appendChild(li);
+
+        input.value = "";
+      }
+    </script>
   </body>
 </html>
